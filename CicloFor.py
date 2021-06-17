@@ -8,7 +8,7 @@ class For:
         numeros = (2,5.6,4,1)
         docente = {'Nombre': 'Marcos', 'Edad':28 , 'Fac': 'Faci'}
         listNotas = [(40,40),(35,40),(50,45)]
-        listAlumnos = [{"Nombre":"Alex","final":80},{"Nombre":"Luci","final":75},{"Nombre":"Felix","final":95}]
+        listAlumnos = [{"Nombre":"Alex","Nota":80},{"Nombre":"Luci","Nota":75},{"Nombre":"Felix","Nota":95}]
         #? range([inicio = 0, limite,[inc/dec = 1].Genere un rango de valores desde un valor inicial a un valor final])
         #! se ejecuta desde inicio hasta el limite
         # for i in range(5): # rango (0,1,2,3,4)  
@@ -36,13 +36,50 @@ class For:
         # for dato in ["H","o","l","a","que","tal"]:
         #     print(dato)
 
-        print("\nDcicionario de nota")
-        # for clave , valor in docente,items():
-        #     print(clave;":", valor,end = " ")  
+        # print("\nDcicionario de nota")
+        # # for clave , valor in docente,items():
+        # #     print(clave;":", valor,end = " ")  
 
-        for docente in listAlumnos:
-            for clave , valor in docente.items():
-                print(clave,":", valor,end = " ")  
+        # for docente in listAlumnos:
+        #     for clave , valor in docente.items():
+        #         print(clave,":", valor,end = " ")  
 
+        # Sacar primedios por cada alumno
+        # listNotas = [(40,40),(35,40,60),(50,45,34,45,40)]  
+        # acum = 0 
+        # long = 0 
+        # for notas in listNotas:  #ciclos anidados
+        #     # print(notas) 
+        #     acuParcial = 0 
+        #     for nota in notas:
+        #         print(nota)
+        #         long=long + 1 
+        #         acum = acum + nota
+        #         acuParcial = acuParcial + nota  
+        #     promParcial = acuParcial /len(notas)
+        #     print("Notas Parciales = {} Pormedio Parcial = {}".format(acuParcial,promParcial))
+        # prom = acum/long
+        # print("Total notas = {} - #Notas = {} :Promedio = {} ".format(acum,long,prom))
+        #     listAlumnos = [{"Nombre":"Alex","Nota":80},{"Nombre":"Luci","Nota":75},{"Nombre":"Felix","Nota":95}]
+        #    #Sacar promedio general de un grupo de alumnos
+        #     acum = 0 
+        #     cont = 0 
+        #     for alumnos in listAlumnos:
+        #         print(alumnos)
+        #         cont += 1 
+        #         for i, va in alumnos.items():
+        #             print(i," : ", va , end= " ")
+        #             if i  == "Nota": acum = acum + va
+        #     print (acum / cont)
+        # palabra = " Bienvenido a mi cumpleaños"
+        # #presentar poor lista las vocales
+        # vocales = []
+        # for carac in palabra:
+        #     if carac in ("a","e","i","o","u"):
+        #         vocales.append(carac)
+        # print(vocales)
+        #segunda forma
+        print ([carac for carac in " Bienvenido a mi cumpleaños" if carac in ("a","e","i","o","u") ]) #comprension
+       
 bucle1 = For()
 bucle1.usoFor()
