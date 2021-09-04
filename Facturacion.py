@@ -8,12 +8,17 @@ class Empresa:
 
     def mostrarEmpresa(self):
         print("Empresa: {:20} Ruc: {} ".format(self.nombre,self.ruc))
-    
-class Cliente:
+
+from abc import ABC, abstractmethod 
+class Cliente(ABC):
         def __init__(self,nom,ced,tel): 
             self.nombre = nom
             self.cedula = ced  
-            self.telefono = tel
+            self.telefono = tel 
+
+        @abstractmethod
+        def getCedula(self):
+            return self.cedula 
 
         def mostrarCliente(self):
             print(self.nombre,self.cedula, self.telefono)
@@ -54,6 +59,9 @@ class ClientePersonal(Cliente): # herencia y polimorfismo
     def mostrarCliente(self): #- se aplica polimorfismo porque hay datos que no son necesario mostrar
         print("Cliente: {:13}  Cédula: {}" .format(self.nombre, self.cedula))
 
+    def getCedula(self):
+        return super().getCedula() 
+
 class Artículo: 
     secuencia = 0  
     iva = 0.12
@@ -68,7 +76,8 @@ class Artículo:
         print(self.código, self.descripcion)
 
 class DetVenta: 
-    linea = 0  # atributo de clase - instancia
+    linea = 0  # atributo de clase - instancia 
+
     def __init__(self,articulo,cantidad) :
         DetVenta.linea += 1  # Contador de las linaes de detalles
         self.lineaDetalle = DetVenta.linea
@@ -99,17 +108,20 @@ class CabVenta: # Relacion entre entidades o clases
         for det in self.detalleVenta:
           print("{:5} {:15} {} {:6} {:10}".format(det.linea,det.articulo.descripcion,det.precio,det.cantidad,det.precio * det.cantidad )) 
         print("Total Venta: {:30}".format(self.total))  
-    
-empres = Empresa()
-cli1 = ClientePersonal("Viki","0955189756","1324657829", False)
-arti1 = Artículo( "Azúcar",2.50, 200) 
-arti2 = Artículo( "Leche",1.50, 100)  
-today = date.today()
-fecha = date(2021,8,15) 
-venta = CabVenta("F001", date.today(),cli1)
-venta.AgregarDetalle(arti1,4)
-venta.AgregarDetalle(arti2,6)
-venta.mostrarVenta(empres.nombre,empres.ruc)
+
+# cli1 = Cliente("Viki","0955189756","0960392786")
+ 
+# empres = Empresa()
+# cli1 = ClientePersonal("Viki","0955189756","1324657829", False)
+# print(cli1.getCedula())
+# arti1 = Artículo( "Azúcar",2.50, 200) 
+# arti2 = Artículo( "Leche",1.50, 100)  
+# today = date.today()
+# fecha = date(2021,8,15) 
+# venta = CabVenta("F001", date.today(),cli1)
+# venta.AgregarDetalle(arti1,4)
+# venta.AgregarDetalle(arti2,6)
+# venta.mostrarVenta(empres.nombre,empres.ruc)
 # empres.mostrarEmpresa()
 # print(empres.nombre)  
 
@@ -133,4 +145,42 @@ venta.mostrarVenta(empres.nombre,empres.ruc)
 # arti3 = Artículo( "Pan",0.30, 150) 
 # arti3.mostrarArticulo()  
 
-# print(Artículo.iva)
+# print(Artículo.iva) 
+
+class InterfaceSistemaPago (ABC):
+    @abstractmethod
+    def pago(self): 
+        pass
+
+    @abstractmethod
+    def saldo(self):  
+        pass
+
+class PagoTarjetaImplements(InterfaceSistemaPago):
+    def pago(self):
+        return "Pago tarjeta" 
+    
+    def saldo(self):
+        return "Saldo Tarjetarebajo" 
+
+class PagoContratoImplements(InterfaceSistemaPago):
+    def pago(self):
+        return "Pago Contrato" 
+    
+    def saldo(self):
+        return "Saldo Contrato rebajo"
+
+class Vendedor():
+    def __init__(self,nombre):
+        self.nombre = nombre
+    
+    def moduloPagp(self,contratoV):
+        return contratoV.pago()
+    
+
+pagoTarjeta = PagoTarjetaImplements()
+print(pagoTarjeta.pago()) 
+Contrato = PagoContratoImplements()
+#print(Contrato.pago())
+ven1 = Vendedor("Viki")
+print(ven1.moduloPagp(Contrato)) 
